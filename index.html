@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suffragettes – </title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:  #5b2d82;
+      --green:   #2e7d4f;
+      --gold:    #c9a227;
+      --cream:   #faf6ee;
+      --dark:    #1a1008;
+      --paper:   #f2ead8;
+      --ink:     #2c1a06;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    /* ── noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--purple);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: .04em;
+      padding: .75rem 0;
+      text-decoration: none;
+    }
+    .nav-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: .75rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    nav ul { list-style: none; display: flex; gap: 0; margin-left: auto; }
+    nav ul li a {
+      display: block;
+      padding: 1rem 1.2rem;
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s, background .2s;
+    }
+    nav ul li a:hover { color: var(--gold); background: rgba(255,255,255,.06); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--purple);
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(90deg, var(--green), var(--gold), var(--purple));
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .3rem .9rem;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+    .hero-img {
+      width: 140px;
+      margin: 0 auto 1.5rem;
+      display: block;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,.5));
+      animation: floatY 4s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.01em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-top: .4rem;
+      color: rgba(255,255,255,.75);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 4rem 1.5rem; }
+
+    .container { max-width: 860px; margin: 0 auto; }
+
+    /* situation */
+    .situation {
+      background: var(--paper);
+      border-top: 5px solid var(--green);
+    }
+    .situation h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+    .situation h2 span {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .3rem;
+    }
+    .situation p {
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+
+    /* how to gain */
+    .how-to {
+      background: white;
+      border-left: 6px solid var(--gold);
+    }
+    .how-to .container { display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center; }
+    @media (max-width: 620px) { .how-to .container { grid-template-columns: 1fr; } }
+    .how-to img { width: 120px; filter: sepia(.3); }
+    .how-to h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--purple);
+      margin-bottom: .8rem;
+    }
+    .how-to h2 span {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .3rem;
+    }
+
+    /* links row */
+    .links-row {
+      background: var(--purple);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .75rem 1.8rem;
+      border-radius: 2px;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+    .btn-gold  { background: var(--gold);   color: var(--dark); }
+    .btn-green { background: var(--green);  color: white; }
+    .btn-white { background: white;         color: var(--purple); }
+
+    /* banner image */
+    .banner-img {
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(.25) contrast(1.05);
+    }
+
+    /* quote banner */
+    .quote-banner {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .quote-banner blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-style: italic;
+      max-width: 740px;
+      margin: 0 auto;
+      line-height: 1.5;
+      color: var(--gold);
+    }
+    .quote-banner cite {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      font-style: normal;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      margin-top: .8rem;
+    }
+
+    /* puzzles */
+    .puzzles { background: var(--cream); }
+    .puzzles h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--purple);
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+    .puzzles .sub {
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem;
+      font-weight: 300;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2.5rem;
+    }
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .puzzle-card {
+      background: white;
+      border-top: 4px solid var(--purple);
+      padding: 1.5rem 1.4rem;
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      position: relative;
+    }
+    .puzzle-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.14); }
+    .puzzle-card:nth-child(2) { border-color: var(--green); }
+    .puzzle-card:nth-child(3) { border-color: var(--gold); }
+    .puzzle-card:nth-child(4) { border-color: #c0392b; }
+    .puzzle-card:nth-child(5) { border-color: #2980b9; }
+    .puzzle-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: .7rem;
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: .3rem;
+    }
+    .puzzle-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      color: var(--purple);
+    }
+    .puzzle-card:nth-child(2) h3 { color: var(--green); }
+    .puzzle-card:nth-child(3) h3 { color: #a07c1a; }
+    .puzzle-card:nth-child(4) h3 { color: #c0392b; }
+    .puzzle-card:nth-child(5) h3 { color: #2980b9; }
+    .puzzle-card p { font-size: .92rem; color: #555; }
+    .puzzle-arrow {
+      position: absolute;
+      bottom: 1rem; right: 1.2rem;
+      font-size: 1.2rem;
+      color: #ccc;
+      transition: color .2s, right .2s;
+    }
+    .puzzle-card:hover .puzzle-arrow { color: var(--purple); right: .9rem; }
+
+    /* final puzzle */
+    .final {
+      background: var(--paper);
+      border-top: 5px solid var(--gold);
+    }
+    .final .container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 640px) { .final .container { grid-template-columns: 1fr; } }
+    .final img {
+      width: 100%;
+      border-radius: 4px;
+      filter: sepia(.3) contrast(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    .final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+    .final h2 span {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem;
+      font-weight: 300;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .4rem;
+    }
+
+    /* footer */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: .85rem;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 300;
+      letter-spacing: .08em;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer strong { color: rgba(255,255,255,.75); }
+
+    /* colour stripe */
+    .stripe {
+      height: 8px;
+      background: linear-gradient(90deg,
+        var(--purple) 0%, var(--purple) 33%,
+        white 33%, white 66%,
+        var(--green) 66%, var(--green) 100%
+      );
+    }
+
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- nav -->
+<nav>
+  <a class="nav-brand" href="#">Suffragettes</a>
+  
+  <ul>
+    <li><a href="#">Home</a></li>
+  </ul>
+</nav>
+
+<!-- hero -->
+<header class="hero">
+  <div class="hero-badge"></div>
+  <!-- vintage megaphone placeholder -->
+  <svg class="hero-img" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="60" cy="60" r="55" fill="rgba(255,255,255,.08)"/>
+    <!-- fist/suffragette fist icon simplified -->
+    <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="62" fill="white">✊</text>
+  </svg>
+  <h1><em>Suffering</em></h1>
+  <h2>for Suffrage</h2>
+</header>
+
+<div class="stripe"></div>
+
+<!-- situation -->
+<section class="situation">
+  <div class="container reveal">
+    <h2>
+      <span>The Context</span>
+      The Situation
+    </h2>
+    <p>
+      America is fighting overseas in the Great War but there is also conflict at home. Women are yearning for equal treatment and suffrage — the right to vote. Numerous women who have spoken out have been silenced &amp; imprisoned. Help women gain voting rights by winning over public opinion and put pressure on government leaders to pass a new amendment to secure suffrage.
+    </p>
+  </div>
+</section>
+
+<!-- how to gain -->
+
+
+<section class="how-to">
+  <div class="container reveal">
+    <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="56" fill="none" stroke="var(--gold)" stroke-width="3"/>
+      <text x="60" y="52" text-anchor="middle" font-family="Playfair Display,serif" font-size="13" fill="var(--purple)" font-weight="700">YOUR</text>
+      <text x="60" y="70" text-anchor="middle" font-family="Playfair Display,serif" font-size="13" fill="var(--purple)" font-weight="700">MISSION</text>
+      <circle cx="60" cy="60" r="42" fill="none" stroke="var(--green)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2rem);color:var(--purple);margin:1rem 0 .8rem;">Your Mission</h2>
+    <p style="max-width:680px;margin:0 auto;font-size:1.05rem;line-height:1.7;color:var(--ink);">
+      You have been handed <strong>5 stages of puzzles</strong> that you must solve. As you solve each puzzle you will be provided numbers that will eventually reveal a phone number to dial. This will be the last push needed to lift the final restraints and pass the <strong>19th Amendment</strong> — granting suffrage. Hurry, there is no time to waste. American women need your help.
+    </p>
+  </div>
+</section>
+
+<!-- cta links -->
+
+
+<!-- banner image (SVG placeholder with suffragette palette) -->
+<svg class="banner-img" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <rect width="900" height="280" fill="#2e1a5a"/>
+  <rect x="0" y="0" width="300" height="280" fill="#5b2d82" opacity=".7"/>
+  <rect x="600" y="0" width="300" height="280" fill="#2e7d4f" opacity=".6"/>
+  <!-- VOTES FOR WOMEN banner -->
+  <rect x="150" y="90" width="600" height="100" rx="6" fill="rgba(201,162,39,.15)" stroke="#c9a227" stroke-width="2"/>
+  <text x="450" y="148" font-family="Georgia,serif" font-size="42" font-weight="bold" fill="#c9a227" text-anchor="middle" letter-spacing="6">VOTES FOR WOMEN</text>
+  <text x="450" y="220" font-family="Georgia,serif" font-size="16" fill="rgba(255,255,255,.4)" text-anchor="middle" letter-spacing="4">19TH AMENDMENT · UNITED STATES CONSTITUTION</text>
+</svg>
+
+<!-- quote banner -->
+<div class="quote-banner reveal">
+  <blockquote>
+    "It's puzzling that someone's gender can be the reason why they are treated unequally."
+  </blockquote>
+  <cite>Collect clues from each puzzle to unlock the final restraints and grant suffrage for all women</cite>
+</div>
+
+<!-- puzzles -->
+<section class="puzzles">
+  <div class="container">
+    <h2 class="reveal">The Five Puzzles</h2>
+    
+    <div class="puzzle-grid">
+
+      <a class="puzzle-card reveal" href="puzzle1.html" target="_blank">
+        <div class="puzzle-num">Puzzle #1</div>
+        <h3>Madame Muckraker</h3>
+        <p>Learn the history of the suffrage movement to write a compelling exposé on the issue.</p>
+        <span class="puzzle-arrow">→</span>
+      </a>
+
+      <a class="puzzle-card reveal" href="puzzle2.html" target="_blank">
+        <div class="puzzle-num">Puzzle #2</div>
+        <h3>Picket the White House</h3>
+        <p>Use civil disobedience to gain attention for the suffrage movement by picketing the White House.</p>
+        <span class="puzzle-arrow">→</span>
+      </a>
+
+      <a class="puzzle-card reveal" href="puzzle3.html" target="_blank">
+        <div class="puzzle-num">Puzzle #3</div>
+        <h3>Show Your Colors</h3>
+        <p>Suffragettes were encouraged to show their colors in support of the suffrage movement.</p>
+        <span class="puzzle-arrow">→</span>
+      </a>
+
+      <a class="puzzle-card reveal" href="puzzle4.html" target="_blank">
+        <div class="puzzle-num">Puzzle #4</div>
+        <h3>Mapping Out the Movement</h3>
+        <p>Federalism is power shared between the states &amp; federal government. Check out the states pioneering the movement.</p>
+        <span class="puzzle-arrow">→</span>
+      </a>
+
+      <a class="puzzle-card reveal" href="feminism.html" target="_blank">
+        <div class="puzzle-num">Puzzle #5</div>
+        <h3>Don't Let the Movement be Invisible</h3>
+        <p>Counter negativity around women's suffrage with pro-suffrage political cartoons.</p>
+        <span class="puzzle-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- final puzzle -->
+
+
+<div class="stripe"></div>
+
+<!-- footer -->
+
+<script>
+  // scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
